@@ -7,22 +7,22 @@ It uses [microsandbox](https://docs.microsandbox.dev/getting-started/introductio
 
 ## Usage
 
-Clone this repository and build the sandbox image from its root:
+Download the [configuration files](#configuration) to `~/.config/sandbox`:
 
 ```shell
-# default tag: agent-sandbox
-bash build-local.sh
-
-# or specify a custom tag
-bash build-local.sh custom-tag
+curl -fsSL --create-dirs --output-dir ~/.config/sandbox \
+    -O https://raw.githubusercontent.com/pnevyk/sandbox/main/config/msb-config-claude.yaml \
+    -O https://raw.githubusercontent.com/pnevyk/sandbox/main/config/msb-config-copilot.yaml
 ```
+
+The sandbox image is published to `ghcr.io/pnevyk/sandbox/agent-sandbox` and rebuilt weekly.
 
 Create a sandbox with the current directory mounted (Claude Code example):
 
 ```shell
-CLAUDE_CODE_OAUTH_TOKEN=<token from claude setup-token> msb create agent-sandbox \
+CLAUDE_CODE_OAUTH_TOKEN=<token from claude setup-token> msb create ghcr.io/pnevyk/sandbox/agent-sandbox \
     --name my-sandbox \
-    --conf path/to/sandbox/repo/config/msb-config-claude.yaml \
+    --conf ~/.config/sandbox/msb-config-claude.yaml \
     --mount-dir ./:/home/sandbox/workspace
 ```
 
@@ -33,6 +33,30 @@ msb exec my-sandbox
 ```
 
 You are all set.
+
+### Local build
+
+Clone this repository, then build the sandbox image from its root and load it into microsandbox:
+
+```shell
+git clone https://github.com/pnevyk/sandbox.git
+cd sandbox
+
+# default tag: agent-sandbox
+bash build-local.sh
+
+# or specify a custom tag
+bash build-local.sh custom-tag
+```
+
+Use the local tag in place of the published image:
+
+```shell
+CLAUDE_CODE_OAUTH_TOKEN=<token from claude setup-token> msb create agent-sandbox \
+    --name my-sandbox \
+    --conf ~/.config/sandbox/msb-config-claude.yaml \
+    --mount-dir ./:/home/sandbox/workspace
+```
 
 ## Secrets
 
@@ -68,13 +92,13 @@ Optional shell aliases for everyday use:
 # prepare environment for sandbox creation
 # create as many presets as you need
 # '<msb create vars> ; <secret vars> ' form: secrets apply only to the next command, not the shell
-alias sbx-work='SBX_CONFIG="/absolute/path/to/msb-config.yaml" ; CLAUDE_CODE_OAUTH_TOKEN=$(secret-tool lookup type claude-code-oauth-work) '
+alias sbx-work='SBX_CONFIG="$HOME/.config/sandbox/msb-config-claude.yaml" ; CLAUDE_CODE_OAUTH_TOKEN=$(secret-tool lookup type claude-code-oauth-work) '
 
 # fixed sandbox name based on the current directory
 alias sbx-name='echo "$(basename $(pwd))-$(pwd | shasum -a 256 | cut -c1-8)"'
 
 # create a new sandbox for the current working directory
-alias sbxc='msb create agent-sandbox --name $(sbx-name) --conf "$SBX_CONFIG" --mount-dir ./:/home/sandbox/workspace'
+alias sbxc='msb create ghcr.io/pnevyk/sandbox/agent-sandbox --name $(sbx-name) --conf "$SBX_CONFIG" --mount-dir ./:/home/sandbox/workspace'
 
 # connect to the sandbox
 alias sbx='msb exec $(sbx-name)'
@@ -108,7 +132,7 @@ Contributions are welcome.
 The sandbox image definition is in the [Dockerfile](./Dockerfile).
 It is minimal, but it includes common tools and agent harnesses.
 
-Extend the image as needed.
+Extend the image as needed and use it with a [local build](#local-build).
 Contributions are welcome.
 
 ## Debugging
