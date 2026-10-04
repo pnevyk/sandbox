@@ -1,0 +1,24 @@
+cpus: 2
+memory: "8G"
+workdir: "/home/sandbox/workspace"
+user: "sandbox"
+security: restricted
+network:
+  allow: ["api.githubcopilot.com"]
+  dns:
+    rebind_protection: true
+  tls:
+    enabled: true
+  strict: true
+secrets:
+  GITHUB_TOKEN:
+    allow: ["api.githubcopilot.com"]
+    substitution:
+      headers: true
+    require_tls_identity: true
+mounts:
+  # Host's global agent skills
+  - bind: "${HOME}/.agents/skills"
+    target: "/home/sandbox/.agents/skills"
+    noexec: true
+    readonly: true

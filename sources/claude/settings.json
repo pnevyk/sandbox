@@ -1,0 +1,13 @@
+{
+    "$schema": "https://json.schemastore.org/claude-code-settings.json",
+    "permissions": {
+        "defaultMode": "bypassPermissions"
+    },
+    "skipDangerousModePermissionPrompt": true,
+    "theme": "dark",
+    "outputStyle": "Concise",
+    "statusLine": {
+        "type": "command",
+        "command": "bash /home/sandbox/.claude/statusline.sh"
+    }
+}

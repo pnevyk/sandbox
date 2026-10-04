@@ -1,0 +1,24 @@
+cpus: 2
+memory: "8G"
+workdir: "/home/sandbox/workspace"
+user: "sandbox"
+security: restricted
+network:
+  allow: ["api.anthropic.com", "platform.claude.com", "downloads.claude.ai"]
+  dns:
+    rebind_protection: true
+  tls:
+    enabled: true
+  strict: true
+secrets:
+  CLAUDE_CODE_OAUTH_TOKEN:
+    allow: ["api.anthropic.com", "platform.claude.com"]
+    substitution:
+      headers: true
+    require_tls_identity: true
+# mounts:
+#   # Host's global agent skills
+#   - bind: "${HOME}/.claude/skills"
+#     target: "/home/sandbox/.claude/skills"
+#     noexec: true
+#     readonly: true

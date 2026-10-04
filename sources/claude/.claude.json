@@ -1,0 +1,10 @@
+{
+    "hasCompletedOnboarding": true,
+    "lastOnboardingVersion": "9999.99.99",
+    "projects": {
+        "/home/sandbox/workspace": {
+            "hasTrustDialogAccepted": true,
+            "hasCompletedProjectOnboarding": true
+        }
+    }
+}
