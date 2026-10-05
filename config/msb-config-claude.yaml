@@ -16,9 +16,9 @@ secrets:
     substitution:
       headers: true
     require_tls_identity: true
-# mounts:
-#   # Host's global agent skills
-#   - bind: "${HOME}/.claude/skills"
-#     target: "/home/sandbox/.claude/skills"
-#     noexec: true
-#     readonly: true
+mounts:
+  # Host's global agent skills
+  - bind: "${HOME}/.claude/skills"
+    target: "/home/sandbox/.claude/skills"
+    noexec: true
+    readonly: true
