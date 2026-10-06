@@ -5,6 +5,7 @@ user: "sandbox"
 security: restricted
 network:
   allow: [
+    "api.github.com", # Needed for Copilot authentication instead of a token
     "api.individual.githubcopilot.com",
     "proxy.individual.githubcopilot.com",
     "api.business.githubcopilot.com",
@@ -19,12 +20,6 @@ network:
   tls:
     enabled: true
   strict: true
-secrets:
-  GITHUB_TOKEN:
-    allow: ["api.githubcopilot.com"]
-    substitution:
-      headers: true
-    require_tls_identity: true
 mounts:
   # Host's global agent skills
   - bind: "${HOME}/.agents/skills"

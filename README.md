@@ -12,7 +12,8 @@ Download the [configuration files](#configuration) to `~/.config/sandbox`:
 ```shell
 curl -fsSL --create-dirs --output-dir ~/.config/sandbox \
     -O https://raw.githubusercontent.com/pnevyk/sandbox/main/config/msb-config-claude.yaml \
-    -O https://raw.githubusercontent.com/pnevyk/sandbox/main/config/msb-config-copilot.yaml
+    -O https://raw.githubusercontent.com/pnevyk/sandbox/main/config/msb-config-copilot.yaml \
+    -O https://raw.githubusercontent.com/pnevyk/sandbox/main/config/msb-config-vscode.yaml
 ```
 
 The sandbox image is published to `ghcr.io/pnevyk/sandbox/agent-sandbox` and rebuilt weekly.
@@ -123,6 +124,7 @@ Rename the aliases as you like.
 Available configuration files:
 - [Claude Code](./config/msb-config-claude.yaml): for agents that use Claude Code with an OAuth subscription (`claude setup-token`).
 - [GitHub Copilot](./config/msb-config-copilot.yaml): for agents that use the GitHub Copilot API (`copilot`, `opencode`).
+- [GitHub VS Code](./config/msb-config.vscode.yaml): for use with VS Code and GitHub Copilot API.
 
 Add your own configuration if none fits.
 Contributions are welcome.
@@ -134,6 +136,26 @@ It is minimal, but it includes common tools and agent harnesses.
 
 Extend the image as needed and use it with a [local build](#local-build).
 Contributions are welcome.
+
+### VS Code integration
+
+1. Create a new SSH key `ssh-keygen -t ed25519`, use a sandbox-specific filename (e.g., `~/.ssh/id_ed25519_sandbox`).
+2. Authorize the key with microsandbox: `msb ssh authorize --file ~/.ssh/id_ed25519_sandbox.pub`.
+3. Add the following configuration to `~/.ssh/config`:
+    ```
+    Host sandbox
+        HostName 127.0.0.1
+        Port 2222
+        User sandbox
+        IdentityFile ~/.ssh/id_ed25519_sandbox
+        IdentitiesOnly yes
+        StrictHostKeyChecking no
+        UserKnownHostsFile /dev/null
+    ```
+4. Setup an SSH server for the sandbox: `msb ssh serve my-sandbox`. Create an alias `alias sbx-ssh=msb ssh serve $(sbx-name)`.
+5. Open the Command Palette and select _Remote-SSH: Connect to Host_.
+6. Select `sandbox` host.
+7. Wait for setup to finish, then use _File > Open Folder_ to open your project inside the sandbox.
 
 ## Debugging
 
