@@ -152,7 +152,7 @@ Contributions are welcome.
         StrictHostKeyChecking no
         UserKnownHostsFile /dev/null
     ```
-4. Setup an SSH server for the sandbox: `msb ssh serve my-sandbox`. Create an alias `alias sbx-ssh=msb ssh serve $(sbx-name)`.
+4. Setup an SSH server for the sandbox: `msb ssh serve my-sandbox`. Create an alias `alias sbx-ssh='msb ssh serve $(sbx-name)'`.
 5. Open the Command Palette and select _Remote-SSH: Connect to Host_.
 6. Select `sandbox` host.
 7. Wait for setup to finish, then use _File > Open Folder_ to open your project inside the sandbox.
