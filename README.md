@@ -106,6 +106,9 @@ alias sbx='msb exec $(sbx-name)'
 
 # delete the sandbox
 alias sbxd='msb stop $(sbx-name) && msb rm $(sbx-name)'
+
+# import your git identity into sandbox
+alias sbx-git='msb exec $(sbx-name) -- git config --global user.name "$(git config get user.name)" && msb exec $(sbx-name) -- git config --global user.email "$(git config get user.email)"'
 ```
 
 Combine a preset with `sbxc` to create a sandbox and then connect to it with `sbx`:
