@@ -1,7 +1,7 @@
 FROM nvcr.io/nvidia/base/ubuntu:24.04
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    ca-certificates curl git gh jq ripgrep fzf vim nano
+    ca-certificates curl git gh jq ripgrep fzf vim nano python3
 
 RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.8/install.sh | bash \
     && . "$HOME/.nvm/nvm.sh" \
