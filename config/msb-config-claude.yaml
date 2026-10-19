@@ -7,6 +7,8 @@ network:
   allow: ["api.anthropic.com", "platform.claude.com", "downloads.claude.ai"]
   dns:
     rebind_protection: true
+    nameservers: ["1.1.1.1", "8.8.8.8"]
+    query_timeout: "5s"
   tls:
     enabled: true
   strict: true
