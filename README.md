@@ -140,6 +140,29 @@ It is minimal, but it includes common tools and agent harnesses.
 Extend the image as needed and use it with a [local build](#local-build).
 Contributions are welcome.
 
+### Claude Code plugins
+
+The [Claude Code configuration](./config/msb-config-claude.yaml) mounts the host's `~/.claude/plugins` into the sandbox (read-only).
+Installed plugins are visible there, but they are **not enabled**: enablement lives in the settings, which are not shared with the host.
+
+Enable them per project in `.claude/settings.local.json` in the workspace:
+
+```json
+{
+  "enabledPlugins": {
+    "name@marketplace": true
+  }
+}
+```
+
+- Use the plugin keys (`name@marketplace`) from `~/.claude/plugins/installed_plugins.json`.
+- The file is persisted in the workspace, so it survives sandbox recreation, and Claude Code keeps it out of git. Merge into the file if it already exists (e.g., it holds `permissions`).
+- Alternatively, add `enabledPlugins` to `~/.claude/settings.json` inside the sandbox to enable plugins for all projects. This is lost when the sandbox is removed.
+
+Caveats:
+- Only plugins installed at user scope are usable. Project-scoped installs are keyed to the host's project paths and are ignored.
+- The mount is read-only, so plugins that write to their data directory (`~/.claude/plugins/data`) may not work.
+
 ### VS Code integration
 
 1. Create a new SSH key `ssh-keygen -t ed25519`, use a sandbox-specific filename (e.g., `~/.ssh/id_ed25519_sandbox`).

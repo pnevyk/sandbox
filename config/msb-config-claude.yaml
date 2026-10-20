@@ -24,3 +24,7 @@ mounts:
     target: "/home/sandbox/.claude/skills"
     noexec: true
     readonly: true
+  - bind: "${HOME}/.claude/plugins"
+    target: "/home/sandbox/.claude/plugins"
+    noexec: true
+    readonly: true
