@@ -28,3 +28,7 @@ mounts:
     target: "/home/sandbox/.claude/plugins"
     noexec: true
     readonly: true
+  - bind: "${HOME}/.agents/skills"
+    target: "/home/sandbox/.agents/skills"
+    noexec: true
+    readonly: true
