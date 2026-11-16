@@ -1,5 +1,10 @@
 # Sandbox environment
 
+## User instructions
+
+If it exists, read and follow the user's own global instructions: `~/.claude/CLAUDE.user.md` (Claude Code) or `~/.agents/AGENTS.user.md` (other agents).
+They are mounted from the host and may be absent.
+
 You are running inside an isolated sandbox container (microsandbox), not a full developer machine.
 
 ## Environment

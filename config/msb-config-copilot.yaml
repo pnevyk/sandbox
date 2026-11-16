@@ -33,3 +33,8 @@ mounts:
     target: "/home/sandbox/.agents/skills"
     noexec: true
     readonly: true
+  # Host's user-level instructions (must exist on the host)
+  - bind: "${HOME}/.agents/AGENTS.md"
+    target: "/home/sandbox/.agents/AGENTS.user.md"
+    noexec: true
+    readonly: true

@@ -163,6 +163,15 @@ Caveats:
 - Only plugins installed at user scope are usable. Project-scoped installs are keyed to the host's project paths and are ignored.
 - The mount is read-only, so plugins that write to their data directory (`~/.claude/plugins/data`) may not work.
 
+### User-level instructions
+
+The configurations mount the host's user-level instructions read-only, and the built-in instructions tell the agent to read them:
+
+- Claude configurations: host `~/.claude/CLAUDE.md` → `~/.claude/CLAUDE.user.md`
+- Copilot and VS Code configurations: host `~/.agents/AGENTS.md` → `~/.agents/AGENTS.user.md`
+
+The host file **must exist** when the corresponding configuration is used; creating the sandbox fails otherwise.
+
 ### VS Code integration
 
 1. Create a new SSH key `ssh-keygen -t ed25519`, use a sandbox-specific filename (e.g., `~/.ssh/id_ed25519_sandbox`).
