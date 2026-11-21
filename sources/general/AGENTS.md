@@ -10,8 +10,13 @@ You are running inside an isolated sandbox container (microsandbox), not a full 
 ## Environment
 
 - Base image: Ubuntu Noble.
-- Network: default-deny. Only DNS and LLM providers are reachable. No general internet access.
+- Network: set by `$SANDBOX_NETWORK` (`none`: LLM providers only, `allowlist`: listed hosts only, `public`: full internet). If unset, the policy is unknown. Try a request when you need it.
 - `~/workspace` is a host-mounted volume. Nothing outside mounted paths persists.
+
+## Network access
+
+A network error on a needed host means the policy blocks it.
+Do not work around a block (other hosts, mirrors, proxies). Work offline or tell the user which host is needed.
 
 ## Logging sandbox issues
 

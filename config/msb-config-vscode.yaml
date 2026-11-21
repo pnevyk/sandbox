@@ -3,6 +3,8 @@ memory: "8G"
 workdir: "/home/sandbox/workspace"
 user: "sandbox"
 security: restricted
+env:
+  SANDBOX_NETWORK: none
 network:
   allow: [
     "api.github.com", # Needed for Copilot authentication instead of a token
