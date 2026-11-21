@@ -12,6 +12,7 @@ Download the [configuration files](#configuration) to `~/.config/sandbox`:
 ```shell
 curl -fsSL --create-dirs --output-dir ~/.config/sandbox \
     -O https://raw.githubusercontent.com/pnevyk/sandbox/main/config/msb-config-claude.yaml \
+    -O https://raw.githubusercontent.com/pnevyk/sandbox/main/config/msb-config-claude-public.yaml \
     -O https://raw.githubusercontent.com/pnevyk/sandbox/main/config/msb-config-copilot.yaml \
     -O https://raw.githubusercontent.com/pnevyk/sandbox/main/config/msb-config-vscode.yaml
 ```
@@ -126,6 +127,7 @@ Rename the aliases as you like.
 
 Available configuration files:
 - [Claude Code](./config/msb-config-claude.yaml): for agents that use Claude Code with an OAuth subscription (`claude setup-token`).
+- [Claude Code (public network)](./config/msb-config-claude-public.yaml): same as Claude Code, but with full internet access instead of the LLM-only allowlist. Use with caution.
 - [GitHub Copilot](./config/msb-config-copilot.yaml): for agents that use the GitHub Copilot API (`copilot`, `opencode`).
 - [GitHub VS Code](./config/msb-config-vscode.yaml): for use with VS Code and GitHub Copilot API.
 

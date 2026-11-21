@@ -1,0 +1,41 @@
+cpus: 2
+memory: "8G"
+workdir: "/home/sandbox/workspace"
+user: "sandbox"
+security: restricted
+env:
+  SANDBOX_NETWORK: public
+network:
+  policy: public
+  dns:
+    rebind_protection: true
+    nameservers: ["1.1.1.1", "8.8.8.8"]
+    query_timeout: "5s"
+  tls:
+    enabled: true
+  strict: true
+secrets:
+  CLAUDE_CODE_OAUTH_TOKEN:
+    allow: ["api.anthropic.com", "platform.claude.com"]
+    substitution:
+      headers: true
+    require_tls_identity: true
+mounts:
+  # Host's global agent skills
+  - bind: "${HOME}/.claude/skills"
+    target: "/home/sandbox/.claude/skills"
+    noexec: true
+    readonly: true
+  - bind: "${HOME}/.claude/plugins"
+    target: "/home/sandbox/.claude/plugins"
+    noexec: true
+    readonly: true
+  - bind: "${HOME}/.agents/skills"
+    target: "/home/sandbox/.agents/skills"
+    noexec: true
+    readonly: true
+  # Host's user-level instructions (must exist on the host)
+  - bind: "${HOME}/.claude/CLAUDE.md"
+    target: "/home/sandbox/.claude/CLAUDE.user.md"
+    noexec: true
+    readonly: true
