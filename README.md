@@ -127,7 +127,7 @@ Rename the aliases as you like.
 Available configuration files:
 - [Claude Code](./config/msb-config-claude.yaml): for agents that use Claude Code with an OAuth subscription (`claude setup-token`).
 - [GitHub Copilot](./config/msb-config-copilot.yaml): for agents that use the GitHub Copilot API (`copilot`, `opencode`).
-- [GitHub VS Code](./config/msb-config.vscode.yaml): for use with VS Code and GitHub Copilot API.
+- [GitHub VS Code](./config/msb-config-vscode.yaml): for use with VS Code and GitHub Copilot API.
 
 Add your own configuration if none fits.
 Contributions are welcome.
